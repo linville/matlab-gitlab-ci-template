@@ -72,6 +72,9 @@ test_artifacts:
           runner.addPlugin(CodeCoveragePlugin.forFolder(pwd,'IncludingSubfolders',true, ...
           'Producing',CoberturaFormat('artifacts/cobertura.xml')))
           results = runner.run(suite)
+          ftext = string(fileread('artifacts/cobertura.xml'));
+          linerate = regexp(ftext,'line-rate=\"(\d+.\d+)\"','tokens','once');
+          fprintf('\nCode Coverage %i%%\n',round(str2double(linerate)*100));
           assertSuccess(results);
     BLOCK
     matlab -batch runAllTests
@@ -83,6 +86,7 @@ test_artifacts:
         path: "./artifacts/cobertura.xml"
     paths:
       - "./artifacts"
+  coverage: '/Code Coverage.*\s+(\d+%)$/'
 ```
 
 ### Run MATLAB Build
