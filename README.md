@@ -75,7 +75,7 @@ test_artifacts:
           assertSuccess(results);
     BLOCK
     matlab -batch runAllTests
-artifacts:
+  artifacts:
     reports:
       junit: "./artifacts/results.xml"
       coverage_report:
